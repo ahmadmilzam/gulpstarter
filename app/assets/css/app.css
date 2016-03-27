@@ -1,0 +1,1213 @@
+@charset "UTF-8";
+/* ==========================================================================
+   Framework Main File
+   ========================================================================== */
+/**
+ * YOU SHOULD PREDEFINE THE VARIABLES BEFORE IMPORT THE RELEVANT FILES
+ */
+/*
+   TOOLS
+   ========================================================================== */
+/* ==========================================================================
+   FUNCTIONS
+   ========================================================================== */
+/*
+   Strip Unit
+   ========================================================================== */
+/*
+   CONVERT TO REM
+   ========================================================================== */
+/*
+   Rem calc
+   ========================================================================== */
+/**
+ * New Syntax, allows to optionally calculate on a different base value to counter compounding effect of rem's.
+ * Call with 1, 2, 3 or 4 parameters, 'px' is not required but supported:
+ * rem-calc(10 20 30px 40);
+ * Space delimited, if you want to delimit using comma's, wrap it in another pair of brackets
+ *
+ *  rem-calc((10, 20, 30, 40px));
+ *
+ * Optionally call with a different base (eg: 8px) to calculate rem.
+ *
+ *  rem-calc(16px 32px 48px, 8px);
+ *
+ * If you require to comma separate your list
+ *
+ *  rem-calc((16px, 32px, 48), 8px);
+ *
+ *
+ */
+/*
+   Math Helpers.
+   ========================================================================== */
+/**
+ * Half and double numbers, returning rounded integers. E.g.:
+ * .foo{
+ *  padding: halve(30px)
+ * }
+ */
+/* ==========================================================================
+   Grid Mixin, create complex layout ON DEMAND!
+   ========================================================================== */
+/**
+ * In a world of agile development and
+ * super-tablet-multi-magic-laptop-phones,
+ * the best layouts can't be contained in a
+ * single framework or technique.
+ * CSS Libraries are a bloated mess of opinions about how to do your job.
+ * Why let the table-saw tell you where to put the kitchen?
+ * If we can create them ourself?
+ */
+/*
+   Grid Functions
+   ========================================================================== */
+/*
+   Grid Row
+   ========================================================================== */
+/**
+ * For creating container, nested, and bleeded rows
+ * @param:
+ *
+ * $max-width, Given max-width value for the container. Default: $container-width.
+ * $behavior - Any special behavior for this row? Default: false. Options: nest, bleed, nest-bleed, false.
+ */
+/* close grid-row */
+/*
+   Grid Column
+   ========================================================================== */
+/**
+ * Creates a column, should be used inside of a media query to control layouts
+ *
+ * @params:
+ *
+ * $columns - The number of columns this should be
+ * $total-columns - The number of total columns
+ * $last-column - Is this the last column? Default: false.
+ * $center - Center these columns? Default: false.
+ * $offset - # of columns to offset. Default: false.
+ * $push - # of columns to push. Default: false.
+ * $pull - # of columns to pull. Default: false.
+ * $bleed - Get rid of gutter padding on column? Default: false.
+ * $float - Should this float? Default: true. Options: true, false, left, right.
+ * $position - relative position, push and pull require position set. Default: false.
+ */
+/* close grid-column */
+/*
+   How To Use
+   ========================================================================== */
+/**
+ * Mobile First Example
+ *
+ * .container{
+ *   @include grid-row;
+ * }
+ *
+ * .aside{
+ *   @media condition{
+ *     @include grid-column(4);
+ *   }
+ * }
+ *
+ * .content{
+ *   @media condition{
+ *     @include grid-column(8, $last:true);
+ *   }
+ * }
+ */
+/*
+   Font Size Mixin
+   ========================================================================== */
+/*
+ * Create a fully formed type style (sizing and vertical rhythm) by passing in a
+ * single value, e.g.:
+ *
+ * .foo {
+ *   @include font-size(12px);
+ * }
+ *
+ * This will generate a rem-based font-size as well as
+ * a unitless line-height which will place the element on your baseline, e.g.:
+ *
+ * .foo {
+ *   font-size: 0.75rem;
+ *   line-height: 2;
+ * }
+ *
+ * If you do not want csskit to generate you a line-height automatically, you
+ * simply pass in your own as a second paramater:
+ *
+ * .foo {
+ *   @include font-size(12px, 1.5);
+ * }
+ *
+ * This will yield:
+ *
+ * .foo {
+ *   font-size: 0.75rem;
+ *   line-height: 1.5;
+ * }
+ *
+ * This parameter can be any integer, 'inherit', or 'normal'. If you don't want
+ * a line-height at all, pass in a second paramater of 'none' or 'false':
+ *
+ * .foo {
+ *   @include font-size(12px, none);
+ * }
+ *
+ * This will yield:
+ * .foo {
+ *   font-size: 12px;
+ *   font-size: 0.75rem;
+ * }
+ */
+/**
+ * Usage
+ *
+  $dark-background-color: #333;
+  $light-text-color: white;
+
+  $light-background-color: #eee;
+  $dark-text-color: black;
+
+  .dark-background {
+    background: $dark-background-color;
+    color: contrasting-color($dark-background-color, $light-text-color, $dark-text-color);
+  }
+
+  .light-background {
+    background: $light-background-color;
+    color: contrasting-color($light-background-color, $light-text-color, $dark-text-color);
+  }
+  *
+*/
+/* ==========================================================================
+   Tools Responsive
+   ========================================================================== */
+/*
+   Ranges
+   ========================================================================== */
+/*
+   Box Sizing
+   ========================================================================== */
+/**
+ * Border box mixin
+ * @param   $type: border-box
+ */
+/*
+   Clearfix hack by Nicolas Gallagher (https://github.com/necolas)
+   ========================================================================== */
+/**
+ * We use this to do clear floats
+ */
+/* ==========================================================================
+   Common css3 mixin
+   ========================================================================== */
+/*
+   Double borders
+   ========================================================================== */
+/*
+   Transform
+   ========================================================================== */
+/*
+   Transition
+   ========================================================================== */
+/*
+   Triangle
+   ========================================================================== */
+/*
+   Vertical Middle
+   ========================================================================== */
+/*
+   Horizontal Middle
+   ========================================================================== */
+/*
+   VH middle
+   ========================================================================== */
+/*
+   Border Radius
+   ========================================================================== */
+/*
+   SETTINGS
+   ========================================================================== */
+/**
+ * Global variables, site-wide settings, config switches, etc.
+ *
+ * These variables are framework variables, sourced from variables defined
+ * above. Feel free to use these variables throughout your project, but do not
+ * modify or reassign them.
+ */
+/*
+   SETTINGS-BREAKPOINTS
+   ========================================================================== */
+/**
+ * Hold our breakpoint range and conditions.
+ *
+ * These can be invoked later on using this line of code:
+ *
+ * @media conditions{
+ *   @content;
+ * }
+ *
+ * Using Relative Units for Widths
+ *
+ * You may have noticed that we use em for
+ * our default CSS Media Query widths instead of px.
+ * This was a conscious decision since it
+ * allows the Media Queries to respond appropriately
+ * when people zoom the webpage.
+ * Check out this article by Brad Frost
+ * http://bradfrostweb.com/blog/post/7-habits-of-highly-effective-media-queries/#relative
+ * for some background information on using relative units
+ * within Media Queries.
+ */
+/*
+   Media Query Conditions
+   ========================================================================== */
+/**
+ * Would you like classes to be prepended with a namespace? If so,
+ * define it here.
+ */
+/* ==========================================================================
+   DEFAULTS
+   ========================================================================== */
+/**
+ * THESE VARIABLES ARE DEFAULT; DO NOT MODIFY OR ADJUST THE VARIABLES DIRECTLY.
+ * YOU SHOULD PREDEFINE THE VARIABLES IN
+ * YOUR OWN MAIN FILES BEFORE INCLUDE THIS FILE.
+ */
+/*
+   High-level base settings.
+   ========================================================================== */
+/**
+ * These variables are framework variables, sourced from variables defined
+ * above. Feel free to use these variables throughout your project, but do not
+ * modify or reassign them.
+ */
+/*
+   SETTINGS-BREAKPOINTS
+   ========================================================================== */
+/**
+ * Hold our breakpoint range and conditions.
+ *
+ * These can be invoked later on using this line of code:
+ *
+ * @media conditions{
+ *   @content;
+ * }
+ *
+ * Using Relative Units for Widths
+ *
+ * You may have noticed that we use em for
+ * our default CSS Media Query widths instead of px.
+ * This was a conscious decision since it
+ * allows the Media Queries to respond appropriately
+ * when people zoom the webpage.
+ * Check out this article by Brad Frost
+ * http://bradfrostweb.com/blog/post/7-habits-of-highly-effective-media-queries/#relative
+ * for some background information on using relative units
+ * within Media Queries.
+ */
+/*
+   Media Query Conditions
+   ========================================================================== */
+/*
+   Debuger
+   ========================================================================== */
+/*
+   Namespace.
+   ========================================================================== */
+/**
+ * Would you like classes to be prepended with a namespace? If so,
+ * define it here.
+ */
+/**
+ * If we have included this file, set a variable to tell the rest of the
+ * framework that we have some base settings.
+ */
+/*
+   GENERIC
+   ========================================================================== */
+/**
+ *  Low-specificity, far-reaching rulesets (e.g. CSS resets)
+ *
+ * [1] Reset/Normalize
+ * [2] Shared
+ */
+/* [1] */
+/* ==========================================================================
+   NORMALIZE.CSS by by Nicolas Gallagher (https://github.com/necolas)
+   ========================================================================== */
+/* normalize.css v3.0.2 | MIT License | git.io/normalize */
+/**
+ * 1. Set default font family to sans-serif.
+ * 2. Prevent iOS text size adjust after orientation change, without disabling
+ *    user zoom.
+ */
+html {
+  font-family: sans-serif;
+  /* 1 */
+  -ms-text-size-adjust: 100%;
+  /* 2 */
+  -webkit-text-size-adjust: 100%;
+  /* 2 */ }
+
+/**
+ * Remove default margin.
+ */
+body {
+  margin: 0; }
+
+/* HTML5 display definitions
+   ========================================================================== */
+/**
+ * Correct `block` display not defined for any HTML5 element in IE 8/9.
+ * Correct `block` display not defined for `details` or `summary` in IE 10/11
+ * and Firefox.
+ * Correct `block` display not defined for `main` in IE 11.
+ */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+main,
+menu,
+nav,
+section,
+summary {
+  display: block; }
+
+/**
+ * 1. Correct `inline-block` display not defined in IE 8/9.
+ * 2. Normalize vertical alignment of `progress` in Chrome, Firefox, and Opera.
+ */
+audio,
+canvas,
+progress,
+video {
+  display: inline-block;
+  /* 1 */
+  vertical-align: baseline;
+  /* 2 */ }
+
+/**
+ * Prevent modern browsers from displaying `audio` without controls.
+ * Remove excess height in iOS 5 devices.
+ */
+audio:not([controls]) {
+  display: none;
+  height: 0; }
+
+/**
+ * Address `[hidden]` styling not present in IE 8/9/10.
+ * Hide the `template` element in IE 8/9/11, Safari, and Firefox < 22.
+ */
+[hidden],
+template {
+  display: none; }
+
+/* Links
+   ========================================================================== */
+/**
+ * Remove the gray background color from active links in IE 10.
+ */
+a {
+  background-color: transparent; }
+
+/**
+ * Improve readability when focused and also mouse hovered in all browsers.
+ */
+a:active,
+a:hover {
+  outline: 0; }
+
+/* Text-level semantics
+   ========================================================================== */
+/**
+ * Address styling not present in IE 8/9/10/11, Safari, and Chrome.
+ */
+abbr[title] {
+  border-bottom: 1px dotted; }
+
+/**
+ * Address style set to `bolder` in Firefox 4+, Safari, and Chrome.
+ */
+b,
+strong {
+  font-weight: bold; }
+
+/**
+ * Address styling not present in Safari and Chrome.
+ */
+dfn {
+  font-style: italic; }
+
+/**
+ * Address variable `h1` font-size and margin within `section` and `article`
+ * contexts in Firefox 4+, Safari, and Chrome.
+ */
+h1 {
+  font-size: 2em;
+  margin: 0.67em 0; }
+
+/**
+ * Address styling not present in IE 8/9.
+ */
+mark {
+  background: #ff0;
+  color: #000; }
+
+/**
+ * Address inconsistent and variable font size in all browsers.
+ */
+small {
+  font-size: 80%; }
+
+/**
+ * Prevent `sub` and `sup` affecting `line-height` in all browsers.
+ */
+sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline; }
+
+sup {
+  top: -0.5em; }
+
+sub {
+  bottom: -0.25em; }
+
+/* Embedded content
+   ========================================================================== */
+/**
+ * Remove border when inside `a` element in IE 8/9/10.
+ */
+img {
+  border: 0; }
+
+/**
+ * Correct overflow not hidden in IE 9/10/11.
+ */
+svg:not(:root) {
+  overflow: hidden; }
+
+/* Grouping content
+   ========================================================================== */
+/**
+ * Address margin not present in IE 8/9 and Safari.
+ */
+figure {
+  margin: 1em 40px; }
+
+/**
+ * Address differences between Firefox and other browsers.
+ */
+hr {
+  box-sizing: content-box;
+  height: 0; }
+
+/**
+ * Contain overflow in all browsers.
+ */
+pre {
+  overflow: auto; }
+
+/**
+ * Address odd `em`-unit font size rendering in all browsers.
+ */
+code,
+kbd,
+pre,
+samp {
+  font-family: monospace, monospace;
+  font-size: 1em; }
+
+/* Forms
+   ========================================================================== */
+/**
+ * Known limitation: by default, Chrome and Safari on OS X allow very limited
+ * styling of `select`, unless a `border` property is set.
+ */
+/**
+ * 1. Correct color not being inherited.
+ *    Known issue: affects color of disabled elements.
+ * 2. Correct font properties not being inherited.
+ * 3. Address margins set differently in Firefox 4+, Safari, and Chrome.
+ */
+button,
+input,
+optgroup,
+select,
+textarea {
+  color: inherit;
+  /* 1 */
+  font: inherit;
+  /* 2 */
+  margin: 0;
+  /* 3 */ }
+
+/**
+ * Address `overflow` set to `hidden` in IE 8/9/10/11.
+ */
+button {
+  overflow: visible; }
+
+/**
+ * Address inconsistent `text-transform` inheritance for `button` and `select`.
+ * All other form control elements do not inherit `text-transform` values.
+ * Correct `button` style inheritance in Firefox, IE 8/9/10/11, and Opera.
+ * Correct `select` style inheritance in Firefox.
+ */
+button,
+select {
+  text-transform: none; }
+
+/**
+ * 1. Avoid the WebKit bug in Android 4.0.* where (2) destroys native `audio`
+ *    and `video` controls.
+ * 2. Correct inability to style clickable `input` types in iOS.
+ * 3. Improve usability and consistency of cursor style between image-type
+ *    `input` and others.
+ */
+button,
+html input[type="button"],
+input[type="reset"],
+input[type="submit"] {
+  -webkit-appearance: button;
+  /* 2 */
+  cursor: pointer;
+  /* 3 */ }
+
+/**
+ * Re-set default cursor for disabled elements.
+ */
+button[disabled],
+html input[disabled] {
+  cursor: default; }
+
+/**
+ * Remove inner padding and border in Firefox 4+.
+ */
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+  border: 0;
+  padding: 0; }
+
+/**
+ * Address Firefox 4+ setting `line-height` on `input` using `!important` in
+ * the UA stylesheet.
+ */
+input {
+  line-height: normal; }
+
+/**
+ * It's recommended that you don't attempt to style these elements.
+ * Firefox's implementation doesn't respect box-sizing, padding, or width.
+ *
+ * 1. Address box sizing set to `content-box` in IE 8/9/10.
+ * 2. Remove excess padding in IE 8/9/10.
+ */
+input[type="checkbox"],
+input[type="radio"] {
+  box-sizing: border-box;
+  /* 1 */
+  padding: 0;
+  /* 2 */ }
+
+/**
+ * Fix the cursor style for Chrome's increment/decrement buttons. For certain
+ * `font-size` values of the `input`, it causes the cursor style of the
+ * decrement button to change from `default` to `text`.
+ */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  height: auto; }
+
+/**
+ * 1. Address `appearance` set to `searchfield` in Safari and Chrome.
+ * 2. Address `box-sizing` set to `border-box` in Safari and Chrome
+ *    (include `-moz` to future-proof).
+ */
+input[type="search"] {
+  -webkit-appearance: textfield;
+  /* 1 */
+  /* 2 */
+  box-sizing: content-box; }
+
+/**
+ * Remove inner padding and search cancel button in Safari and Chrome on OS X.
+ * Safari (but not Chrome) clips the cancel button when the search input has
+ * padding (and `textfield` appearance).
+ */
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none; }
+
+/**
+ * Define consistent border, margin, and padding.
+ */
+fieldset {
+  border: 1px solid #c0c0c0;
+  margin: 0 2px;
+  padding: 0.35em 0.625em 0.75em; }
+
+/**
+ * 1. Correct `color` not being inherited in IE 8/9/10/11.
+ * 2. Remove padding so people aren't caught out if they zero out fieldsets.
+ */
+legend {
+  border: 0;
+  /* 1 */
+  padding: 0;
+  /* 2 */ }
+
+/**
+ * Remove default vertical scrollbar in IE 8/9/10/11.
+ */
+textarea {
+  overflow: auto; }
+
+/**
+ * Don't inherit the `font-weight` (applied by a rule above).
+ * NOTE: the default cannot safely be changed in Chrome and Safari on OS X.
+ */
+optgroup {
+  font-weight: bold; }
+
+/* Tables
+   ========================================================================== */
+/**
+ * Remove most spacing between table cells.
+ */
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+td,
+th {
+  padding: 0; }
+
+/* [2] */
+/*------------------------------------*    #SHARED
+\*------------------------------------*/
+/**
+ * Where `margin-bottom` is concerned,this value will be the same as the
+ * base line-height. This allows us to keep a consistent vertical rhythm.
+ * As per: csswizardry.com/2012/06/single-direction-margin-declarations
+ */
+h1, h2, h3, h4, h5, h6,
+ul, ol, dl,
+blockquote, p, address,
+table,
+fieldset, figure,
+pre {
+  margin-bottom: 1.5rem; }
+
+/**
+ * Where `margin-left` is concerned we want to try and indent certain elements
+ * by a consistent amount. Define that amount once,here.
+ */
+ul, ol, dd {
+  margin-left: 1.5rem; }
+
+/*
+   BASE
+   ========================================================================== */
+/**
+ * Uncllassed HTML elements (eg. a{}, p{}, blockquote{} )
+ *
+ * [1] Page
+ * [2] Headings
+ * [3] Paragraphs
+ * [4] Links
+ * [5] Images
+ * [6] List
+ * [7] Hr
+ * [8] Blockquote
+ */
+/* [1] */
+/* ==========================================================================
+   PAGE
+   ========================================================================== */
+/**
+ * High, page-level styling.
+ *
+ * 1. Set the default `font-family`, `font-size` and `line-height` for the entire project,
+ *    sourced from our default variables. The `font-size` is calculated to exist
+ *    in ems, the `line-height` is calculated to exist unitlessly.
+ * 2. Force scrollbars to always be visible to prevent awkward 'jumps' when
+ *    navigating between pages that do/do not have enough content to produce
+ *    scrollbars naturally.
+ * 3. Ensure the page always fills at least the entire height of the viewport.
+ * 4. Fonts on OSX will look more consistent with other systems that do not
+ *    render text using sub-pixel anti-aliasing.
+ */
+html {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: normal;
+  font-size: 1em;
+  /* [1] */
+  line-height: 1.5;
+  /* [1] */
+  background-color: #fff;
+  color: #333;
+  overflow-y: scroll;
+  /* [2] */
+  min-height: 100%;
+  /* [3] */
+  box-sizing: border-box;
+  -moz-osx-font-smoothing: grayscale;
+  /* [4] */
+  -webkit-font-smoothing: antialiased;
+  /* [4] */ }
+
+*, *:before, *:after {
+  box-sizing: inherit; }
+
+/* [2] */
+/* ==========================================================================
+   HEADINGS
+   ========================================================================== */
+/**
+ * A modified version of heading-size mixin from
+ * https://gist.github.com/lolmaus/7825675
+ *
+ * @param   $max-size:    $heading-size-max
+ * @param   $min-size:    $heading-size-min
+ * @param   $max-heading: 1
+ * @param   $min-heading: 6
+ * @param   $ratio:       $golden
+ * @param   $debug:       false
+ */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  text-rendering: optimizeLegibility;
+  word-wrap: break-word; }
+
+h6,
+.h6 {
+  font-size: 1rem;
+  line-height: 1.3; }
+
+h5,
+.h5 {
+  font-size: 1.0536rem;
+  line-height: 1.3; }
+
+h4,
+.h4 {
+  font-size: 1.14032rem;
+  line-height: 1.3; }
+
+h3,
+.h3 {
+  font-size: 1.28063rem;
+  line-height: 1.3; }
+
+h2,
+.h2 {
+  font-size: 1.50767rem;
+  line-height: 1.3; }
+
+h1,
+.h1 {
+  font-size: 1.875rem;
+  line-height: 1.3; }
+
+@media only screen and (min-width: 64.0625em) {
+  h1, h2, h3, h4, h5, h6 {
+    word-wrap: normal; }
+  h6,
+  .h6 {
+    font-size: 1rem;
+    line-height: 1.5; }
+  h5,
+  .h5 {
+    font-size: 1.07657rem;
+    line-height: 1.39332; }
+  h4,
+  .h4 {
+    font-size: 1.20046rem;
+    line-height: 1.24952; }
+  h3,
+  .h3 {
+    font-size: 1.40091rem;
+    line-height: 1.07074; }
+  h2,
+  .h2 {
+    font-size: 1.72524rem;
+    line-height: 1.73889; }
+  h1,
+  .h1 {
+    font-size: 2.25rem;
+    line-height: 1.33333; } }
+
+/* [3] */
+/* ==========================================================================
+   PARAGRAPHS
+   ========================================================================== */
+/**
+ * The `.lede` class is used to make the introductory text (usually a paragraph)
+ * of a document slightly larger: en.wikipedia.org/wiki/Lede_(news)
+ *
+ * Predefine the variables below in order to alter and enable specific features.
+ */
+.lede {
+  font-size: 1.125rem;
+  line-height: 1.33333; }
+
+/* [4] */
+/* ==========================================================================
+   LINKS
+   ========================================================================== */
+a {
+  color: #3498DB;
+  text-decoration: none;
+  line-height: inherit;
+  -webkit-transition: color 0.3s ease-out 0s;
+  transition: color 0.3s ease-out 0s; }
+  a:hover, a:focus {
+    color: #5dade2; }
+  a img {
+    border: none; }
+
+/* [5] */
+/* ==========================================================================
+   IMAGES
+   ========================================================================== */
+/**
+ * 1. Fluid images for responsive purposes.
+ * 2. Offset `alt` text from surrounding copy.
+ * 3. Setting `vertical-align` removes the whitespace that appears under `img`
+ *    elements when they are dropped into a page as-is. Safer alternative to
+ *    using `display: block;`.
+ */
+img {
+  max-width: 100%;
+  /* [1] */
+  height: auto;
+  /* [1] */
+  font-style: italic;
+  /* [2] */
+  vertical-align: middle;
+  /* [3] */ }
+
+/**
+ * 1. Google Maps breaks if `max-width: 100%` acts upon it; use their selector
+ *    to remove the effects.
+ * 2. If a `width` and/or `height` attribute have been explicitly defined, let’s
+ *    not make the image fluid.
+ */
+.gm-style img,
+img[width],
+img[height] {
+  /* [2] */
+  max-width: none; }
+
+/* [6] */
+/* ==========================================================================
+   LIST
+   ========================================================================== */
+/**
+ * Remove extra vertical spacing when nesting lists.
+ */
+li > ul,
+li > ol {
+  margin-bottom: 0; }
+
+/* [7] */
+/* ==========================================================================
+   HR
+   ========================================================================== */
+hr {
+  border: solid #ccc;
+  border-width: 1px 0 0;
+  margin: 1.5rem 0 1.4375rem;
+  clear: both;
+  height: 0; }
+
+/* [8] */
+/* ==========================================================================
+   BLOCKQUOTE
+   ========================================================================== */
+blockquote footer, blockquote small {
+  display: block;
+  font-size: 0.75rem;
+  line-height: 2;
+  color: #707070; }
+  blockquote footer:before, blockquote small:before {
+    content: '\2014 \00A0'; }
+
+/*
+   Objects
+   ========================================================================== */
+/**
+ * objects, abstractions, and design patterns
+ * (e.g. .media {}, .button{}, .list{}).
+ *
+ * [1]  Grids
+ * [2]  Block
+ * [3]  Box
+ * [4]  Buttons
+ * [5]  Flag
+ * [6]  List Block
+ * [7]  List Dull
+ * [8]  List Inline
+ * [9]  List UI
+ * [10] Media
+ * [11] Pack
+ * [12] Table
+ */
+/* [1] */
+/*
+   Default grid classess
+   ========================================================================== */
+/*
+   Grid unit modifier
+   ========================================================================== */
+/* ==========================================================================
+   GRIDS
+   ========================================================================== */
+/**
+ * Fully customizable and responsive CSS grids.
+ *
+ * Here we set a variable assuming that default and module settings
+ * are not set globally. If they have been previously been defined,
+ * the following variable will be overriden and will be set to `true`.
+ */
+/*
+   Grids settings.
+   ========================================================================== */
+/**
+ * We use these as default total columns throughout the framework.
+ */
+/*
+   Default grid classess
+   ========================================================================== */
+/*
+   Grid unit modifier
+   ========================================================================== */
+/*
+   Default Grid Classes
+   ========================================================================== */
+.grid {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 0;
+  margin-bottom: 0;
+  max-width: 1000px; }
+  .grid .grid {
+    width: auto;
+    margin-left: -0.75rem;
+    margin-right: -0.75rem;
+    max-width: none; }
+
+.grid__item {
+  position: relative;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  float: left; }
+
+@media only screen {
+  .small-1 {
+    width: 100%; }
+  .small-1of2 {
+    width: 50%; }
+  .small-1of3 {
+    width: 33.33333%; }
+  .small-2of3 {
+    width: 66.66667%; }
+  .small-1of4 {
+    width: 25%; }
+  .small-3of4 {
+    width: 75%; }
+  .small-1of5 {
+    width: 20%; }
+  .small-2of5 {
+    width: 40%; }
+  .small-3of5 {
+    width: 60%; }
+  .small-4of5 {
+    width: 80%; } }
+
+@media only screen and (min-width: 48.0625em) {
+  .medium-1 {
+    width: 100%; }
+  .medium-1of2 {
+    width: 50%; }
+  .medium-1of3 {
+    width: 33.33333%; }
+  .medium-2of3 {
+    width: 66.66667%; }
+  .medium-1of4 {
+    width: 25%; }
+  .medium-3of4 {
+    width: 75%; }
+  .medium-1of5 {
+    width: 20%; }
+  .medium-2of5 {
+    width: 40%; }
+  .medium-3of5 {
+    width: 60%; }
+  .medium-4of5 {
+    width: 80%; } }
+
+@media only screen and (min-width: 64.0625em) {
+  .large-1 {
+    width: 100%; }
+  .large-1of2 {
+    width: 50%; }
+  .large-1of3 {
+    width: 33.33333%; }
+  .large-2of3 {
+    width: 66.66667%; }
+  .large-1of4 {
+    width: 25%; }
+  .large-3of4 {
+    width: 75%; }
+  .large-1of5 {
+    width: 20%; }
+  .large-2of5 {
+    width: 40%; }
+  .large-3of5 {
+    width: 60%; }
+  .large-4of5 {
+    width: 80%; } }
+
+/* [2] */
+/* [3] */
+/* [4] */
+/* ==========================================================================
+   BUTTONS
+   ========================================================================== */
+/**
+ * A simple button object.
+ */
+/**
+ * Here we set a variable assuming that 'box-sizing: border-box;' is not
+ * set globally. If it has been previously been defined,
+ * the following variable will be overriden and will be set to 'true'.
+ */
+/**
+ * 1. Allow us to style box model properties.
+ * 2. Line different sized buttons up a little nicer.
+ * 3. Reset/normalize some styles.
+ * 4. Force all button-styled elements to appear clickable.
+ * 5. Subtract the border size from the padding value so that buttons do not
+ *    grow larger as we add borders.
+ */
+.btn {
+  display: inline-block;
+  /* [1] */
+  vertical-align: middle;
+  /* [2] */
+  font-weight: normal;
+  /* [3] */
+  position: relative;
+  /* [3] */
+  text-align: center;
+  /* [3] */
+  margin: 0;
+  /* [3] */
+  white-space: normal;
+  /* [3] */
+  cursor: pointer;
+  /* [4] */
+  background-color: #fff;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #fff;
+  -webkit-transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out;
+  padding: 0.6875rem 1.4375rem;
+  /* [6] */
+  font-size: 1rem;
+  line-height: 1.5; }
+  .btn, .btn:hover, .btn:active, .btn:focus {
+    text-decoration: none;
+    /* [4] */
+    color: #333; }
+  .btn:hover, .btn:focus {
+    border-color: #cccccc;
+    background-color: #cccccc; }
+  .btn:active {
+    border-color: #b3b3b3;
+    background-color: #b3b3b3; }
+
+/**
+ * Fix a Firefox bug whereby `input type="submit"` gains 2px extra padding.
+ */
+.btn::-moz-focus-inner {
+  border: 0;
+  padding: 0; }
+
+/* [5] */
+/* [6] */
+/* [7] */
+/* [8] */
+/* [9] */
+/* [10] */
+/* [11] */
+/* [12] */
+/*
+   COMPONENTS
+   ========================================================================== */
+/**
+ * Discrete, complete chunks of UI (e.g. .carousel {}, .topbar{}).
+ * This is the one layer that the framework doesn't get involved with.
+ * So, import your own components here and do your magic!
+ */
+/*
+   Helpers
+   ========================================================================== */
+/**
+ * High-specificity, very explicit selectors.
+ * Overrides and helper classes (e.g. .hidden {}).
+ *
+ * [1] Clearfix
+ * [2] Float
+ * [3] Text transform
+ * [4] Alignment
+ * [4+] Alignment Responsive
+ * [5] Spacing
+ * [5+] Spacing Responsive
+ * [6] Visibility
+ * [6+] Visibility Responsive
+ * [7] Print
+ */
+/* [1] */
+/* ==========================================================================
+   CLEARFIX
+   ========================================================================== */
+/**
+ * Micro clearfix, as per: css-101.org/articles/clearfix/latest-new-clearfix-so-far.php
+ * Extend the clearfix class with Sass to avoid the `.clearfix` class appearing
+ * over and over in your markup.
+ */
+.clearfix:before, .clearfix:after,
+.grid:before,
+.grid:after {
+  content: " ";
+  display: table; }
+
+.clearfix:after,
+.grid:after {
+  clear: both; }
+
+/* [2] */
+/* [3] */
+/* [4] */
+/* [5] */
+/* [6] */
+/* [7] */
+.text-primary {
+  color: brown; }
+
+/*# sourceMappingURL=../sourcemaps/app.css.map */
