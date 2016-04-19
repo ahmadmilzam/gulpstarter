@@ -5,16 +5,23 @@
  */
 var config = {
   app: './app/',
-  build: '.build',
+  build: './build/',
   src: './src/',
-  bower: './bower_components/'
+  bower: './bower_components/',
+  assets: 'assets/'
 };
 
-var path = {
-  assets: config.app+'assets/',
+var src = {
   scss : config.src+'scss/',
-  js : config.src+'js/'
+  js : config.src+'js/',
 }
+
+var path = {
+  css : config.app+config.assets+'css',
+  js : config.app+config.assets+'js',
+  img : config.app+config.assets+'img'
+}
+
 
 /**
  *
@@ -26,6 +33,7 @@ var gulp = require('gulp'),
     $ = plugins(),
     browserSync = require('browser-sync'),
     reload = browserSync.reload,
+    runSequence = require('run-sequence'),
     del = require('del'),
     argv = require('yargs').argv;
 
@@ -54,15 +62,15 @@ var prefixerOptions = {
 
 gulp.task('scss', function () {
   return gulp
-    .src(path.scss+'app.scss')
+    .src(src.scss+'app.scss')
     .pipe($.plumber())
     .pipe($.sourcemaps.init())
     .pipe($.sass(sassOptions).on('error', $.sass.logError))
     .pipe($.autoprefixer(prefixerOptions))
-    .pipe($.if(argv.production, $.cssmin()))
+    .pipe($.if(argv.production, $.cssnano()))
     .pipe($.if(argv.production, $.rename({suffix: '.min'})))
     .pipe($.if(!argv.production, $.sourcemaps.write('../sourcemaps')))
-    .pipe(gulp.dest(path.assets+'css'))
+    .pipe(gulp.dest(path.css))
     .pipe(reload({
       stream:true
     }));
@@ -89,33 +97,16 @@ var uglifyOptions = {
 gulp.task('script', function(){
   return gulp
     .src([
-      path.js+'lib/lib1.js',
-      path.js+'lib/lib2.js',
-      path.js+'main.js'
+      src.js+'lib/lib1.js',
+      src.js+'lib/lib2.js',
+      src.js+'main.js'
     ])
     .pipe($.sourcemaps.init())
     .pipe($.concat('app.js'))
     .pipe($.if(argv.production, $.uglify(uglifyOptions)))
     .pipe($.if(argv.production, $.rename({suffix: '.min'})))
     .pipe($.if(!argv.production, $.sourcemaps.write('../sourcemaps')))
-    .pipe(gulp.dest(path.assets+'js'))
-    .pipe(reload({
-      stream:true
-    }));
-});
-
-
-/**
- *
- * HTML task
- *
- */
-gulp.task('html', function(){
-  return gulp
-    .src(config.app+'**/*.html')
-    .pipe(reload({
-      stream:true
-    }));
+    .pipe(gulp.dest(path.js));
 });
 
 
@@ -124,29 +115,44 @@ gulp.task('html', function(){
  * Build task
  *
  */
-// clear out all file and folder from build folder
-// gulp.task('build:cleanfolder', function(cb){
-//   del([
-//     config.build+'**'
-//   ], cb);
-// });
 
-// create build folder
-// gulp.task('build:copy', ['build:cleanfolder'], function(){
-//   return gulp
-//     .src(config.app+'**/*')
-//     pipe(gulp.dest(config.build));
-// });
+// clear cache
+gulp.task('clear-cache', function (callback) {
+  return $.cache.clearAll(callback)
+})
 
-// remove unwanted build files
+// clear out all file and folder from build folder - 1st
+gulp.task('clean-folder', function(){
+  return del.sync(config.build);
+});
+
+// create build folder - 2nd
+gulp.task('copy-folder', function(){
+  return gulp
+    .src(config.app+'**/*')
+    .pipe(gulp.dest(config.build));
+});
+
+// optimize images - 3rd
+gulp.task('optim-images', function(){
+  return gulp.src(path.img+'/**/*.+(png|jpg|jpeg|gif|svg)')
+  // Caching images that ran through imagemin
+  .pipe($.cache($.imagemin({
+      interlaced: true
+    })))
+  .pipe(gulp.dest(config.build+config.assets+'img'))
+});
+
+// remove unwanted build files - 4th
 // list all files and directories here that you don't want to include
-// gulp.task('build:remove', ['build:copy'], function(cb){
-//   del([
-//     config.build+'assets/sourcemaps/',
-//     config.build+'assets/css/!(*.min.css)',
-//     config.build+'assets/js/!(*.min.js)'
-//   ], cb);
-// });
+gulp.task('remove', function(){
+  del.sync([
+    config.build+config.assets+'sourcemaps/',
+    config.build+config.assets+'css/!(*.min.css)',
+    config.build+config.assets+'js/!(*.min.js)'
+  ]);
+});
+
 
 
 /**
@@ -162,13 +168,13 @@ gulp.task('browser-sync', function(){
   });
 });
 
-// gulp.task('build-serve', function(){
-//   browserSync({
-//     server: {
-//       baseDir: config.app
-//     }
-//   });
-// });
+gulp.task('build-serve', function(){
+  browserSync({
+    server: {
+      baseDir: config.build
+    }
+  });
+});
 
 
 /**
@@ -177,26 +183,36 @@ gulp.task('browser-sync', function(){
  *
  */
 gulp.task('watch', function(){
-  gulp.watch('./Gulpfile.js', ['base']).on('change', function(event) {
-    console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
-  });
-  gulp.watch(path.scss+'**/*.scss', ['scss']).on('change', function(event) {
-    console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
-  });
-  gulp.watch(path.js+'**/*.js', ['script']).on('change', function(event) {
-    console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
-  });
-  gulp.watch(config.app+'**/*.html', ['html']).on('change', function(event) {
-    console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
-  });
+  gulp.watch('./Gulpfile.js', ['base']);
+
+  gulp.watch(src.scss+'**/*.scss', ['scss']);
+  gulp.watch(src.js+'**/*.js', ['script']);
+
+  gulp.watch(path.js+'/**/*.js', reload);
+  gulp.watch(config.app+'**/*.html', reload);
 });
 
 
 /**
  *
- * Default task
+ * Command task
  *
  */
-gulp.task('base', ['scss', 'script', 'html']);
-gulp.task('default', ['base', 'browser-sync', 'watch']);
-// gulp.task('build', ['build:copy', 'build:remove']);
+gulp.task('base', ['scss', 'script']);
+
+gulp.task('default', function (callback) {
+  runSequence(
+    ['base', 'browser-sync', 'watch'],
+    callback
+  )
+});
+
+gulp.task('build', function (callback) {
+  runSequence(
+    'clean-folder',
+    'copy-folder',
+    'optim-images',
+    'remove',
+    callback
+  )
+});

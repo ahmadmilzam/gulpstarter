@@ -39,7 +39,7 @@ The default task will run and create static local server plus watching your file
 
 
 ```sh
-$ gulp --production
+$ gulp build --production
 ```
 This command will minify your css and js files for production.
 

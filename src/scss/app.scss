@@ -12,6 +12,9 @@
 // Site-wide mixins and functions.
 
 @import "0-tools/tools.all";
+@import "0-tools/my-tools.colors";
+@import "0-tools/my-tools.z-index";
+@import "0-tools/my-tools.triangle";
 
 
 /*
@@ -36,6 +39,8 @@
 // $base-spacing-unit:                    $base-line-height;
 
 // $base-radius:                          3px;
+
+// $base-color-treshold:                  65%;
 
 
 
@@ -129,13 +134,17 @@ $xxlarge-down:  "#{$screen} and (max-width:#{upper-bound($xxlarge-range)})";
  *  Low-specificity, far-reaching rulesets (e.g. CSS resets)
  *
  * [1] Reset/Normalize
- * [2] Shared
+ * [2] Box sizing FTW
+ * [3] Shared
  */
 
 /* [1] */
 @import "2-generic/generic.normalize";
 
 /* [2] */
+@import "2-generic/generic.box-sizing";
+
+/* [3] */
 @import "2-generic/generic.shared";
 
 
@@ -327,9 +336,9 @@ $opposite-float:                        right;
 // $btn-font-size--small:               $btn-font-size * 0.8;
 // $btn-font-size--large:               $btn-font-size * 1.25;
 
-// $btn-background:                     $base-background-color;
-// $btn-color:                          $base-text-color;
-// $btn-color--invert:                  #FFFFFF;
+// $btn-background:                     #2C97DE;
+// $btn-color-dark-background:          $base-background-color;
+// $btn-color-light-background:         $base-text-color;
 
 // $btn-border-width:                   1px;
 // $btn-radius:                         0;
@@ -342,6 +351,7 @@ $opposite-float:                        right;
 // $enable-btn--disabled:               true;
 
 @import "4-objects/objects.buttons";
+@import "4-objects/my-objects.buttons";
 
 
 /* [5] */
@@ -395,7 +405,8 @@ $opposite-float:                        right;
 // $enable-list-inline--delimited:      true;
 // $list-inline-delimit-character:      ",\00A0";
 
-// @import "4-objects/objects.list-inline";
+@import "4-objects/objects.list-inline";
+@import "4-objects/my-objects.list-inline";
 
 /* [9] */
 // $list-ui-namespace:                  $namespace;
@@ -496,9 +507,11 @@ $opposite-float:                        right;
  * This is the one layer that the framework doesn't get involved with.
  * So, import your own components here and do your magic!
  */
-// @import "components.mycomponents1";
-// @import "components.mycomponents2";
-
+@import "5-components/my-components.alerts";
+@import "5-components/my-components.block-list";
+@import "5-components/my-components.forms";
+@import "5-components/my-components.icons";
+@import "5-components/my-components.icons-burger";
 
 
 
@@ -627,5 +640,4 @@ $opposite-float:                        right;
 /* [7] */
 // @import "6-helpers/helpers.print";
 
-
-@import "helpers/helpers.text"
+@import "6-helpers/my-helpers.text";
