@@ -99,7 +99,7 @@ gulp.task('script', function(){
     .src([
       src.js+'lib/lib1.js',
       src.js+'lib/lib2.js',
-      src.js+'main.js'
+      src.js+'app.js'
     ])
     .pipe($.sourcemaps.init())
     .pipe($.concat('app.js'))
