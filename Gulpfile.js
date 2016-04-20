@@ -71,9 +71,7 @@ gulp.task('scss', function () {
     .pipe($.if(argv.production, $.rename({suffix: '.min'})))
     .pipe($.if(!argv.production, $.sourcemaps.write('../sourcemaps')))
     .pipe(gulp.dest(path.css))
-    .pipe(reload({
-      stream:true
-    }));
+    .pipe(browserSync.stream({match: '**/*.css'}));
 });
 
 
@@ -154,7 +152,6 @@ gulp.task('remove', function(){
 });
 
 
-
 /**
  *
  * Browser-Sync task
@@ -188,8 +185,8 @@ gulp.task('watch', function(){
   gulp.watch(src.scss+'**/*.scss', ['scss']);
   gulp.watch(src.js+'**/*.js', ['script']);
 
-  gulp.watch(path.js+'/**/*.js', reload);
-  gulp.watch(config.app+'**/*.html', reload);
+  gulp.watch(path.js+'/**/*.js').on('change', reload);
+  gulp.watch(config.app+'**/*.html').on('change', reload);
 });
 
 
