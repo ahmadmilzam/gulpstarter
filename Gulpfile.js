@@ -157,7 +157,7 @@ gulp.task('remove', function(){
  * Browser-Sync task
  *
  */
-gulp.task('browser-sync', function(){
+gulp.task('serve', function(){
   browserSync({
     server: {
       baseDir: config.app
@@ -165,7 +165,7 @@ gulp.task('browser-sync', function(){
   });
 });
 
-gulp.task('build-serve', function(){
+gulp.task('serve:build', function(){
   browserSync({
     server: {
       baseDir: config.build
@@ -180,7 +180,7 @@ gulp.task('build-serve', function(){
  *
  */
 gulp.task('watch', function(){
-  gulp.watch('./Gulpfile.js', ['base']);
+  gulp.watch('./Gulpfile.js', ['scss', 'script']);
 
   gulp.watch(src.scss+'**/*.scss', ['scss']);
   gulp.watch(src.js+'**/*.js', ['script']);
@@ -195,17 +195,17 @@ gulp.task('watch', function(){
  * Command task
  *
  */
-gulp.task('base', ['scss', 'script']);
-
 gulp.task('default', function (callback) {
   runSequence(
-    ['base', 'browser-sync', 'watch'],
+    ['scss', 'script', 'serve', 'watch'],
     callback
   )
 });
 
 gulp.task('build', function (callback) {
   runSequence(
+    'scss',
+    'script',
     'clean-folder',
     'copy-folder',
     'optim-images',
