@@ -35,7 +35,6 @@ $alert-border-style: solid;
 
   .alert__heading{
     font-weight: 700;
-    @extend %everafter;
     margin-bottom: rem-calc(halve($base-spacing-unit));
   }
   .alert__body{
